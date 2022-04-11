@@ -2,7 +2,6 @@ var getChildrenClasses = function(element, className) {
   var classyChildren = [];
   element.childNodes.forEach(function(child) {
     if (child.classList && child.classList.contains(className)) {
-      console.log("First if");
       classyChildren.push(child);
     }
 
