@@ -1,12 +1,13 @@
 var getChildrenClasses = function(element, className) {
   var classyChildren = [];
   element.childNodes.forEach(function(child) {
-    if (child.classList.includes(className)) {
+    if (child.classList && child.classList.contains(className)) {
+      console.log("First if");
       classyChildren.push(child);
     }
-    if (child.hasChildNodes()) {
-      classyChildren.concat(getChildrenClasses(child))
-    }
+
+    classyChildren = classyChildren.concat(getChildrenClasses(child, className));
+
   })
   return classyChildren;
 }
@@ -15,13 +16,11 @@ var getChildrenClasses = function(element, className) {
 var getElementsByClassName = function(className) {
   var classyElements = [];
 
-  if (document.body.classList.includes(className)) {
+  if (document.body.classList && document.body.classList.contains(className)) {
     classyElements.push(document.body);
   }
 
-  return classyElements.concat(getChildrenClasses(document.body, className));
+  classyElements = classyElements.concat(getChildrenClasses(document.body, className));
 
-  // todo: fix spec file, refresh and go through test website
-
-
+  return classyElements;
 };
